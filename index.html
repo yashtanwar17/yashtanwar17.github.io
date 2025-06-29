@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$cd yash</title>
+  <link rel="icon" type="image/png" href="imgs/fav.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Fira Code', monospace; }
+    body { background:#000; color:#E1E1E1; overflow-x:hidden; }
+    .container { max-width:900px; margin:auto; padding:2rem; }
+
+    header { text-align:center; margin-bottom:2rem; animation: fadeSlideIn 1s ease-out; }
+    header img { width:100px; height:100px; border-radius:50%; border:2px solid #00ffd5; }
+    header h1 { margin-top:0.5rem; font-size:2.2rem; color:#00ffd5; font-weight:800; }
+
+    .section-title {
+      font-size:1.2rem;
+      color:#00ffd5;
+      border-bottom:1px solid #00ffd5;
+      margin:2rem 0 1rem;
+      padding-bottom:.3rem;
+    }
+
+    .grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); }
+    .card {
+      background:#111;
+      border-radius:6px;
+      padding:1rem;
+      border:1px solid #222;
+      transition:transform .3s ease, box-shadow .3s ease;
+    }
+    .card:hover {
+      transform:translateY(-4px);
+      box-shadow:0 0 8px #00ffd5;
+    }
+    .card img {
+      width:100%; height:140px; object-fit:cover; border-radius:4px; margin-bottom:.75rem;
+    }
+    .card h2 {
+      font-size:1rem;
+      color:#00ccff;
+      margin-bottom:.5rem;
+    }
+    .card p {
+      font-size:.85rem;
+      color:#ccc;
+      margin-bottom:.75rem;
+    }
+    .card a {
+      color:#66f;
+      text-decoration:none;
+      font-weight:600;
+      font-size:.85rem;
+    }
+
+    .notebook-entry {
+      background:#111;
+      padding:1rem;
+      border-radius:6px;
+      border:1px solid #222;
+      margin-top:1rem;
+    }
+    .notebook-entry h2 {
+      font-size:1rem;
+      color:#00ccff;
+      margin-bottom:.4rem;
+    }
+    .notebook-entry p {
+      font-size:.85rem;
+      color:#ccc;
+    }
+    .notebook-entry a {
+      color:#66f;
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .contact {
+      margin-top:2rem;
+      text-align:center;
+      padding:1.5rem;
+      background:#111;
+      border-radius:6px;
+    }
+    .contact h2 { color:#00ffd5; margin-bottom:.5rem; }
+    .contact p { margin-bottom:1rem; color:#ccc; }
+    .contact a {
+      color:#00ffd5;
+      margin:0 .5rem;
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    footer { text-align:center; font-size:.8rem; color:#444; margin-top:2rem; }
+
+    @keyframes fadeSlideIn {
+      from { opacity:0; transform:translateY(20px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="imgs/pfp.gif" alt="Yash Tanwar">
+      <h1>Yash Tanwar</h1>
+    </header>
+
+    <div class="about">
+  <p><strong>i write scripts that do the boring stuff for me.</strong></p>
+  <p>automation. ai. reverse engineering. whatever saves time</p>
+</div>
+
+
+    <div class="section-title">[ Projects ]</div>
+    <div class="grid">
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/yashtanwar17/ecommerce-ai-chatbot/main/static/abt.png" alt="E‑Commerce Chatbot">
+        <h2>$ E‑Commerce Chatbot</h2>
+        <p>OpenAI-driven assistant for product Q&A, price checks, specs & more. Built with Flask & flexible JSON/MySQL backend.</p>
+        <a href="https://github.com/yashtanwar17/ecommerce-ai-chatbot" target="_blank">GitHub →</a>
+      </div>
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/yashtanwar17/AI-OSINT-Web/main/images/report.png" alt="OSINT Scanner">
+        <h2>$ AI OSINT Scanner</h2>
+        <p>Modular web recon + vulnerability scanner with AI log analysis, subdomain takeover, XSS, CMS CVEs & more.</p>
+        <a href="https://github.com/yashtanwar17/AI-OSINT-Web" target="_blank">Explore →</a>
+      </div>
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/yashtanwar17/auto-clicker/main/bgs/app.png" alt="Auto Clicker">
+        <h2>$ Auto Clicker 1.0</h2>
+        <p>Sleek PyQt5 UI auto-clicker with adjustable CPS, blurred window, logging and safe start/stop features.</p>
+        <a href="https://github.com/yashtanwar17/auto-clicker" target="_blank">View Repo →</a>
+      </div>
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/yashtanwar17/ai-bug/main/static/abt.png" alt="AI Bug Analyzer">
+        <h2>$ AI Bug Analyzer</h2>
+        <p>Flask app leveraging GPT‑style APIs to interpret and auto‑fix code bugs. Lightweight, prompt‑customizable, no DB required.</p>
+        <a href="https://github.com/yashtanwar17/ai-bug" target="_blank">Try It →</a>
+      </div>
+    </div>
+
+    <div class="section-title">[ Notebooks ]</div>
+    <div class="notebook-entry">
+      <h2>$ Toxic Comment Classifier</h2>
+      <p>BERT‑based model fine-tuned on Jigsaw data to classify comments as toxic/non-toxic. Ideal for moderation pipelines.<br>
+      <a href="https://colab.research.google.com/drive/1ppdHgFl95lPcgWsO5nYikCAZBHEMYmDM" target="_blank">Notebook →</a></p>
+    </div>
+
+    <div class="contact">
+      <h2>$ Contact</h2>
+      <p>
+        <a href="mailto:yasht10989@gmail.com">Email</a> |
+        <a href="https://github.com/yashtanwar17" target="_blank">GitHub</a>
+      </p>
+    </div>
+
+    <footer>
+      &copy; 2025 yashtanwar17
+    </footer>
+  </div>
+</body>
+</html>
