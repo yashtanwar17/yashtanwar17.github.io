@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just Some Avocado</title>
+  <link rel="icon" type="image/png" href="../imgs/fav.png">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+   <style>
+    .spectrogram {
+  display: block;
+  max-width: 100%;
+  max-height: 400px;       /* fixed max height */
+  width: auto;
+  height: auto;
+  border: 1px solid #222;
+  border-radius: 6px;
+  margin: 1rem 0;
+  object-fit: contain;      /* keeps aspect ratio inside the box */
+}
+
+    .terminal {
+  background: #111;           /* dark background */
+  color: #E1E1E1;            /* text color */
+  font-family: 'Fira Code', monospace;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #222;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.terminal .prompt {
+  color: #00ffd5;
+}
+
+.terminal .command {
+  color: #fff;
+}
+
+.terminal .output {
+  color: #ccc;
+  margin-left: 1rem;
+  white-space: pre-wrap;
+}
+
+    html {
+  scroll-behavior: smooth;
+}
+
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Fira Code', monospace; }
+    body { background:#000; color:#E1E1E1; overflow-x:hidden; }
+    .container { max-width:900px; margin:auto; padding:2rem; }
+
+    header { text-align:center; margin-bottom:2rem; animation: fadeSlideIn 1s ease-out; }
+    header img { width:100px; height:100px; border-radius:50%; border:2px solid #00ffd5; }
+    header h1 { margin-top:0.5rem; font-size:2.2rem; color:#00ffd5; font-weight:800; }
+
+    .section-title {
+      font-size:1.2rem;
+      color:#00ffd5;
+      border-bottom:1px solid #00ffd5;
+      margin:2rem 0 1rem;
+      padding-bottom:.3rem;
+    }
+
+    .grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); }
+    .card {
+      background:#111;
+      border-radius:6px;
+      padding:1rem;
+      border:1px solid #222;
+      transition:transform .3s ease, box-shadow .3s ease;
+    }
+    .card:hover {
+      transform:translateY(-4px);
+      box-shadow:0 0 8px #00ffd5;
+    }
+    .card img {
+      width:100%; height:140px; object-fit:cover; border-radius:4px; margin-bottom:.75rem;
+    }
+    .card h2 {
+      font-size:1rem;
+      color:#00ccff;
+      margin-bottom:.5rem;
+    }
+    .card p {
+      font-size:.85rem;
+      color:#ccc;
+      margin-bottom:.75rem;
+    }
+    .card a {
+      color:#66f;
+      text-decoration:none;
+      font-weight:600;
+      font-size:.85rem;
+    }
+
+    .notebook-entry {
+      background:#111;
+      padding:1rem;
+      border-radius:6px;
+      border:1px solid #222;
+      margin-top:1rem;
+    }
+    .notebook-entry h2 {
+      font-size:1rem;
+      color:#00ccff;
+      margin-bottom:.4rem;
+    }
+    .notebook-entry p {
+      font-size:.85rem;
+      color:#ccc;
+    }
+    .notebook-entry a {
+      color:#66f;
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .contact {
+      margin-top:2rem;
+      text-align:center;
+      padding:1.5rem;
+      background:#111;
+      border-radius:6px;
+    }
+    .contact h2 { color:#00ffd5; margin-bottom:.5rem; }
+    .contact p { margin-bottom:1rem; color:#ccc; }
+    .contact a {
+      color:#00ffd5;
+      margin:0 .5rem;
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    footer { text-align:center; font-size:.8rem; color:#444; margin-top:2rem; }
+
+    @keyframes fadeSlideIn {
+      from { opacity:0; transform:translateY(20px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Just Some Avocado</h1>
+      <a href="../ctfs.html" style="color:#00ffd5; display:inline-block; margin-top:1rem;">← Back to CTF List</a>
+    </header>
+
+    <section class="notebook-entry">
+      <h2>Just Some Avocado - scriptCTF 2025</h2>
+      <img src="../imgs/avocadoctf.png" alt="Problem" class="spectrogram">
+      <p>
+        Category: Forensics<br>
+        Author: yash 
+      </p>
+    </section>
+
+    <section class="notebook-entry">
+        <h2>Introduction</h2>
+        <p>The provided JPEG image (<code>avocado.jpg</code>) contained a hidden encrypted ZIP file and a WAV audio file.
+        The goal was to extract all hidden files, analyze the audio for hidden data, and retrieve the final flag.</p>
+        <br>
+            <h1>The Journey to the Flag</h2>
+        <h2>Step 1: Initial Recon</h2>
+      <p>We first check the file for hidden content using <code>strings</code> and <code>binwalk</code>.</p>
+      <div class="terminal">
+        <div><span class="prompt">$</span> <span class="command">strings avocado.jpg</span></div>
+        <div class="output">
+# Output shows some embedded ZIP filenames hints
+
+...
+.S=w
+U2NdA
+justsomezip.zipUT
+1[hux
+staticnoise.wavUT
+4\hux
+        </div>
+      </div>
+      <div class="terminal">
+        <div><span class="prompt">$</span> <span class="command">binwalk avocado.jpg</span></div>
+        <div class="output">
+DECIMAL       HEXADECIMAL     DESCRIPTION
+0             0x0             JPEG image data, JFIF standard 1.01
+100599        0x188F7         Zip archive data, encrypted at least v1.0, name: justsomezip.zip
+100922        0x18A3A         Zip archive data, encrypted at least v2.0, name: staticnoise.wav
+509321        0x7C589         End of Zip archive
+        </div>
+      </div>
+      <p>Observation: There is an encrypted ZIP and a WAV file embedded inside the image.</p>
+<br>
+      <h2>Step 2: Extract First ZIP</h2>
+      <p>We use binwalk extraction:</p>
+      <div class="terminal">
+        <div><span class="prompt">$</span> <span class="command">binwalk -e avocado.jpg</span></div>
+        <div class="output">
+# Extracted _avocado.jpg.extracted/188F7.zip
+# ZIP is password-protected
+        </div>
+      </div>
+      <p>Attempting to unzip shows a password prompt:</p>
+      <div class="terminal">
+        <div><span class="prompt">$</span> <span class="command">unzip 188F7.zip</span></div>
+        <div class="output">
+[188F7.zip] justsomezip.zip password:
+        </div>
+      </div>
+      <p>We need to crack the password to proceed.</p>
+<br>
+      <h2>Step 3: Crack ZIP Password</h2>
+      <p>Using a wordlist (<code>rockyou.txt</code>) and <code>fcrackzip</code>:</p>
+      <div class="terminal">
+        <div><span class="prompt">$</span> <span class="command">fcrackzip -u -D -p rockyou.txt 188F7.zip</span></div>
+        <div class="output">
+PASSWORD FOUND!!!!: pw == impassive3428
+        </div>
+      </div>
+      <p>Extracting with the password gives the inner ZIP and the WAV file:</p>
+      <div class="terminal">
+        <div><span class="prompt">$</span> <span class="command">unzip -P impassive3428 188F7.zip</span></div>
+        <div class="output">
+extracting: justsomezip.zip
+extracting: staticnoise.wav
+        </div>
+      </div>
+
+      <h2>Step 4: Analyze WAV File</h2>
+      <p>Check file type and metadata:</p>
+      <div class="terminal">
+        <div><span class="prompt">$</span> <span class="command">binwalk staticnoise.wav</span></div>
+        <div class="output">
+# RIFF audio data, PCM, 2 channels, 22050 Hz
+        </div>
+      </div>
+      <div class="terminal">
+        <div><span class="prompt">$</span> <span class="command">file staticnoise.wav</span></div>
+        <div class="output">
+staticnoise.wav: RIFF (little-endian) data, WAVE audio, Microsoft PCM, 16 bit, stereo 22050 Hz
+        </div>
+      </div>
+      <p>Listening revealed gradually decreasing noise → indicates hidden data in spectrogram. Using Sonic Visualiser, we split channels and generated a spectrogram:</p>
+      <img src="../imgs/avocado.png" alt="Spectrogram of WAV" class="spectrogram">
+      <p>Analysis of the spectrogram revealed the hidden password:</p>
+      <div class="terminal">
+        <div class="output">d41v3ron</div>
+      </div>
+
+      <h2>Step 5: Extract Final ZIP and Retrieve Flag</h2>
+      <div class="terminal">
+        <div><span class="prompt">$</span> <span class="command">unzip -P d41v3ron justsomezip.zip</span></div>
+        <div class="output">
+# extracting: flag.txt
+        </div>
+      </div>
+      <div class="terminal">
+        <div><span class="prompt">$</span> <span class="command">cat flag.txt</span></div>
+        <div class="output">scriptCTF{1_l0ve_d41_v3r0n}</div>
+      </div>
+    </section>
+
+    <section class="notebook-entry">
+      <h2>FLAG</h2>
+      <P>scriptCTF{1_l0ve_d41_v3r0n}</P>
+    </section>
+
+    <footer>
+      &copy; 2025 yashtanwar17
+    </footer>
+  </div>
+</body>
+</html>
