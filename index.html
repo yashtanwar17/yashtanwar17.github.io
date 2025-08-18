@@ -8,6 +8,10 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <style>
+    html {
+  scroll-behavior: smooth;
+}
+
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Fira Code', monospace; }
     body { background:#000; color:#E1E1E1; overflow-x:hidden; }
     .container { max-width:900px; margin:auto; padding:2rem; }
@@ -107,6 +111,15 @@
     <header>
       <img src="imgs/pfp.gif" alt="Yash Tanwar">
       <h1>Yash Tanwar</h1>
+      <header>
+
+  <nav style="margin-top:1rem;">
+    <a href="#projects" style="margin-right:1rem; color:#00ffd5;">$Projects</a>
+    <a href="#notebooks" style="margin-right:1rem; color:#00ffd5;">$Notebooks</a>
+    <a href="ctfs.html" style="color:#00ffd5;">$CTFs</a>
+  </nav>
+</header>
+
     </header>
 
     <div class="about">
@@ -115,7 +128,7 @@
 </div>
 
 
-    <div class="section-title">[ Projects ]</div>
+    <div id="projects" class="section-title">[ Projects ]</div>
     <div class="grid">
       <div class="card">
         <img src="https://raw.githubusercontent.com/yashtanwar17/AI-Video-Maker-Offline-/refs/heads/main/imgs/ui.jpeg" alt="AI Short Video Maker (Offline)">
@@ -149,7 +162,7 @@
       </div>
     </div>
 
-    <div class="section-title">[ Notebooks ]</div>
+    <div id="notebooks" class="section-title">[ Notebooks ]</div>
     <div class="notebook-entry">
       <h2>$ Toxic Comment Classifier</h2>
       <p>BERT‑based model fine-tuned on Jigsaw data to classify comments as toxic/non-toxic. Ideal for moderation pipelines.<br>
@@ -160,6 +173,8 @@
       <p>Demonstrates a Pi Pico HID payload triggering a PowerShell reverse shell, paired with a Python listener. For educational use only.<br>
       <a href="https://colab.research.google.com/drive/1t3s4SHh3HE58-qq2Lueu1o96QcdzIytu" target="_blank">Notebook →</a></p>
     </div>
+  
+
 
     <div class="contact">
       <h2>$ Contact</h2>
